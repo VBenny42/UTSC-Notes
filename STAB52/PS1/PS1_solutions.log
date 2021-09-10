@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.17)  10 SEP 2021 13:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.17)  10 SEP 2021 14:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -872,7 +872,12 @@ Package mdframed Info: mdframed detected package amsthm
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 95.
+LaTeX Font Info:    Trying to load font information for TS1+bch on input line 9
+9.
 
+(/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ts1bch.fd
+File: ts1bch.fd 2004/10/18 font definitions for TS1/bch.
+)
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
 Make it at least 13.59999pt.
@@ -884,11 +889,11 @@ This may cause the page layout to be inconsistent, however.
 ]
 (./PS1_solutions.aux) ) 
 Here is how much of TeX's memory you used:
- 18622 strings out of 480608
- 370316 string characters out of 5903630
- 637748 words of memory out of 5000000
- 34147 multiletter control sequences out of 15000+600000
- 541743 words of font info for 48 fonts, out of 8000000 for 9000
+ 18646 strings out of 480608
+ 370677 string characters out of 5903630
+ 637741 words of memory out of 5000000
+ 34167 multiletter control sequences out of 15000+600000
+ 542060 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  65i,11n,103p,1022b,1201s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base
@@ -900,7 +905,7 @@ b></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></
 usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pf
 b>
-Output written on PS1_solutions.pdf (1 page, 67169 bytes).
+Output written on PS1_solutions.pdf (1 page, 67797 bytes).
 PDF statistics:
  40 PDF objects out of 1000 (max. 8388607)
  29 compressed objects within 1 object stream
