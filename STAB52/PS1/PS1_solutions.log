@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.17)  10 SEP 2021 21:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.17)  10 SEP 2021 21:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -910,21 +910,21 @@ Overfull \hbox (218.17134pt too wide) in paragraph at lines 127--128
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 128.
-<venn_pic.pdf, id=16, 172.94913pt x 166.20293pt>
-File: venn_pic.pdf Graphic file (type pdf)
-<use venn_pic.pdf>
-Package pdftex.def Info: venn_pic.pdf  used on input line 149.
-(pdftex.def)             Requested size: 113.81102pt x 109.37218pt.
+<venn_pic.png, id=16, 308.15125pt x 295.1025pt>
+File: venn_pic.png Graphic file (type png)
+<use venn_pic.png>
+Package pdftex.def Info: venn_pic.png  used on input line 149.
+(pdftex.def)             Requested size: 113.81102pt x 108.98808pt.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 154.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 158.
-[2 <./venn_pic.pdf>] (./PS1_solutions.aux) ) 
+[2 <./venn_pic.png>] (./PS1_solutions.aux) ) 
 Here is how much of TeX's memory you used:
- 18718 strings out of 480608
- 371999 string characters out of 5903630
+ 18719 strings out of 480608
+ 371979 string characters out of 5903630
  640511 words of memory out of 5000000
  34230 multiletter control sequences out of 15000+600000
  547118 words of font info for 61 fonts, out of 8000000 for 9000
@@ -942,10 +942,10 @@ ts/cm/cmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy9.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/
 symbols/msam10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfo
 nts/symbols/msbm10.pfb>
-Output written on PS1_solutions.pdf (2 pages, 97675 bytes).
+Output written on PS1_solutions.pdf (2 pages, 189047 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 58 PDF objects out of 1000 (max. 8388607)
+ 41 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
