@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 
 \usepackage{amsmath, amsthm, amssymb, mathtools, commath}
-\usepackage{datetime, geometry, xcolor, tcolorbox, graphicx
+\usepackage{datetime, geometry, xcolor, tcolorbox, graphicx, calc
 	%enumitem
 }
 \usepackage[tikz]{mdframed}
@@ -157,6 +157,47 @@
 					\begin{mdframed}
 						$ G = A \cap B \cap \neg C $
 					\end{mdframed}
+				\newpage
+				\item Show that $ P(A \cup B \cup C)=P(A)+P(B)+P(C) - P(A \cap B) - P(B \cap C) - P(A \cap C)+ P (A \cap B \cap C ) $, i.e. prove the 3-set version of the inclusion-exclusion principle.
+					\begin{mdframed}
+						\begin{proof} By using the 2-set version of the inclusion principle, we can prove
+							\begin{align*}
+								P(A \cup B \cup C) &= P(A \cup (B \cup C))	\qquad\qquad\text{{\small Treating $ B \cup C $ as one event.}}\\
+								&= \underbrace{P(A) + P(B \cup C) - P(A \cap (B \cup C))}_{\text{By 2-set version.}}\\
+								&= P(A) + P(B \cup C) - P((A \cap B) \cup (A \cap C))\\
+								&= P(A) + \underbrace{P(B) + P(C) - P(B \cap C)}_{\text{By 2-set version.}} - P((A \cap B) \cup (A \cap C))\\
+								&= P(A) + P(B) + P(C) - P(B \cap C) - \underbrace{P(A \cap B) + P(A \cap C) - P(A \cap B \cap C)}_{\text{By 2-set version.}}\\
+								&= P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) - P(B \cap C) + P(A \cap B \cap C) \qedhere
+							\end{align*}
+						\end{proof}
+					\end{mdframed}
 			\end{enumerate}
+
+		\item (Inclusion-exclusion principle; SOA Exam P, May 2003) A survey of a groups viewing habits over the last year revealed the following information:
+			\begin{itemize}
+				\begin{minipage}[t]{\widthof{14\% watched gymnastics and baseball $ (G \cap B)  $} + 1cm}
+					\item 28\% watched gymnastics $ (G) $
+					\item 19\% watched soccer $ (S) $
+					\item 12\% watched baseball and soccer $ (B \cap S) $
+					\item 8\% watched all three sports. ($ G \cap B \cap S) $
+				\end{minipage}
+				\begin{minipage}[t]{\widthof{10\% watched gymnastics and baseball $ (G \cap S) $}}
+					\item 29\% watched baseball $ (B) $
+					\item 14\% watched gymnastics and baseball $ (G \cap B)  $
+					\item 10\% watched gymnastics and soccer $ (G \cap S) $
+				\end{minipage}
+			\end{itemize}
+			Calculate the percentage of the group that:
+				\begin{enumerate}
+					\item Watched only gymnastics last year.
+						\begin{mdframed}
+							This is the same as $ (G - S) \cup (G - B) $.
+							\begin{align*}
+								(G - S) \cup (G - B) &= (G - (G \cap S)) \cup (G - (G \cap B))\\
+								&= (G - (G \cap S)) + (G - (G \cap B)) - ((G - (G \cap S)) \cap (G - (G \cap B)))
+							\end{align*}
+						\end{mdframed}
+					\item Watched none of the three sports last year.
+				\end{enumerate}
 	\end{enumerate}
 \end{document}
