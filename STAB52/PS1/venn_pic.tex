@@ -1,6 +1,7 @@
 \documentclass[border=1mm]{standalone}
 
-\usepackage{tikz, xcolor}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
 
 \begin{document}
 \begin{tikzpicture}
@@ -22,5 +23,23 @@
 	\node at (90:1.5) 	{$ G $};
 	\node at (210:1.5) 	{$ I $};
 	\node [] {$ H $};
+\end{tikzpicture}
+
+\begin{tikzpicture} [set/.style = {%draw,
+		circle,
+		minimum size = 4cm,
+		fill=Rhodamine,
+		opacity = 0.4,
+		text opacity = 1}]
+
+	\node (A) [set, label = {135:$A$}] {};
+	\node (C) at (300:2cm) [set, label = {240:$ C $}] {};
+	\node (B) at (0:2cm) [set, label = {45:$ B $}] {};
+
+	\node at (barycentric cs:A=1,B=1) [] {$X$};
+	\node at (barycentric cs:A=1,C=1) [] {$Y$};
+	\node at (barycentric cs:B=1,C=1) [] {$Z$};
+	\node at (barycentric cs:A=1,B=1,C=1) [] {$H$};
+
 \end{tikzpicture}
 \end{document}

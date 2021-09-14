@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.17)  14 SEP 2021 13:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.17)  14 SEP 2021 19:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -928,17 +928,26 @@ Package mdframed Info: mdframed detected package amsthm
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 194.
- [3] (./PS1_solutions.aux) ) 
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 205.
+
+Overfull \hbox (0.66536pt too wide) detected at line 212
+[]
+ []
+
+[3] [4] (./PS1_solutions.aux) ) 
 Here is how much of TeX's memory you used:
- 18731 strings out of 480608
- 372159 string characters out of 5903630
- 640605 words of memory out of 5000000
- 34241 multiletter control sequences out of 15000+600000
- 549903 words of font info for 68 fonts, out of 8000000 for 9000
+ 18738 strings out of 480608
+ 372257 string characters out of 5903630
+ 642650 words of memory out of 5000000
+ 34246 multiletter control sequences out of 15000+600000
+ 553152 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 65i,16n,103p,1022b,1201s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips
-/base/8r.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/bitstrea/charter/b
+ 65i,18n,103p,1022b,1201s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dv
+ips/base/8r.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/bitstrea/charte
+r/bchb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/bitstrea/charter/b
 chr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/bitstrea/charter/bchr
 i8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex
 10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
@@ -949,10 +958,10 @@ b></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.p
 fb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
 10.pfb>
-Output written on PS1_solutions.pdf (3 pages, 296718 bytes).
+Output written on PS1_solutions.pdf (4 pages, 303917 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 68 PDF objects out of 1000 (max. 8388607)
+ 48 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

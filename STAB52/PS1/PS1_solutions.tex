@@ -191,13 +191,29 @@
 				\begin{enumerate}
 					\item Watched only gymnastics last year.
 						\begin{mdframed}
-							This is the same as $ (G - S) \cup (G - B) $.
+							This is the same as watching gymnastics but not soccer or baseball. i.e. $ (G - (S \cup B)) $.
 							\begin{align*}
-								(G - S) \cup (G - B) &= (G - (G \cap S)) \cup (G - (G \cap B))\\
-								&= (G - (G \cap S)) + (G - (G \cap B)) - ((G - (G \cap S)) \cap (G - (G \cap B)))
+								\left(G - \left(S \cup B\right)\right) &= \underbrace{\left(G - \left(G \cap \left(S \cup B\right) \right) \right)}_{\text{From 3i.}}\\
+								&= G - \left( \left(G \cap S \right) \cup \left(G \cap B \right)   \right)\\
+								&= G - \left( \left(G \cap S \right) + \left(G \cap B \right)  - \left(G \cap B \cap S \right) \right)\\
+								&= 0.28 - \left( \left(0.10\right) + \left(0.14\right)  - \left(0.08\right) \right)\\
+								&= \textbf{0.12}
 							\end{align*}
 						\end{mdframed}
 					\item Watched none of the three sports last year.
+						\begin{mdframed}
+							This is the same is $ \neg (G \cup B \cup S) $
+							\begin{align*}
+								\neg (G \cup B \cup S) &= 1 - (G \cup B \cup S)\\
+								&= 1 - {\left( G + B + S - \left(G \cap B \right) - \left(G \cap S \right) - \left(B \cap S \right)  + \left( G \cap B \cap S \right) \right)} \qquad\qquad\text{{\small From 4iii.}} \\
+								&= 1 - \left( 0.28 + 0.29 + 0.19 - \left(0.14\right) - \left(0.10\right) - \left(0.12\right)  + \left(0.08\right) \right)\\
+								&= 1 - 0.48\\
+								&= \textbf{0.52}
+							\end{align*}
+						\end{mdframed}
 				\end{enumerate}
+
+		\item (Betting) Probabilities are often expressed as fractional odds in betting situations. To fix ideas, consider a random experiment (e.g. basketball match) and a specific event (e.g. Raptors win by more than 10 points). When you bet money on the event, the amounts you win ($ W $) or lose ($ L $) are determined by the \textit{odds}, which are usually quoted as the ratio $ W/L $. The odds work as follows: if you wager $ L $ and the event occurs, then you win $ W $ on top of your original $ L $. If you wager $ L $ and the event does not occur, then you lose the $ L $ you wagered. You can scale $ L $ up or down and $ W $ will change proportionately. Suppose the event at hand, call it $ A $, has probability $ P (A) = p $. If you gamble on it, on average you win $ p $ fraction of times and lose $ 1-p $ fraction of times. So you average net gain is $ pW - (1 - p) L $.
+
 	\end{enumerate}
 \end{document}
