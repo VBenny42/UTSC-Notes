@@ -46,6 +46,8 @@
 
 %\usepackage{fourier}
 \renewcommand{\rmdefault}{bch}
+%\usepackage[sfdefault]{roboto}  %% Option 'sfdefault' only if the base font of the document is to be sans serif
+%\usepackage[T1]{fontenc}
 %\renewcommand{\familydefault}{\sfdefault}
 
 %\pagecolor[rgb]{0,0,0} %black    % to change page to night mode
@@ -214,6 +216,12 @@
 				\end{enumerate}
 
 		\item (Betting) Probabilities are often expressed as fractional odds in betting situations. To fix ideas, consider a random experiment (e.g. basketball match) and a specific event (e.g. Raptors win by more than 10 points). When you bet money on the event, the amounts you win ($ W $) or lose ($ L $) are determined by the \textit{odds}, which are usually quoted as the ratio $ W/L $. The odds work as follows: if you wager $ L $ and the event occurs, then you win $ W $ on top of your original $ L $. If you wager $ L $ and the event does not occur, then you lose the $ L $ you wagered. You can scale $ L $ up or down and $ W $ will change proportionately. Suppose the event at hand, call it $ A $, has probability $ P (A) = p $. If you gamble on it, on average you win $ p $ fraction of times and lose $ 1-p $ fraction of times. So you average net gain is $ pW - (1 - p) L $.
+			\begin{enumerate}
+				\item Find the implied fair probability of a bet based on its odds $ W/L $, i.e. find the value of $ p $ in terms of $ W $, $ L $ such that $ pW - (1 - p)L = 0 $
+				\item Let $ A $ be some event with odds $ 3/1 $ and let its complement $ A^c $ have odds $ 1/1 $. Find the values of the implied probabilities $ P(A) = p$, $ P(A^c) = q $ based on the odds. Do these satisfy the probability axioms?
+				\item Using the previous part’s odds, find a betting strategy that always generates a profit, no matter what the outcome. Your strategy should consist of two different amounts to wager simultaneously on events $ A $ and $ A^c $.\\
+				Note: The situation where you make risk-free money in gambling/finance is called \emph{arbitrage}.
+			\end{enumerate}
 
 	\end{enumerate}
 \end{document}

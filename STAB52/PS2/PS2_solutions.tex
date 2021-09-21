@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amsthm, amssymb, mathtools, commath}
+\usepackage{datetime, geometry, xcolor, tcolorbox, graphicx, calc
+	%enumitem
+}
+\usepackage[tikz]{mdframed}
+\usepackage{tikz}
+
+\geometry{
+	right=0.5in,
+	left=0.5in,
+	top=1in,
+	bottom=0.8in
+}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\fancyhf{}
+\lhead{Problem Set 2. Counting}
+\rhead{Vinesh Benny}
+\rfoot{\thepage}
+
+%\renewcommand{\headrulewidth}{0pt}
+
+\title{STAB52 -- Problem Set 2. Counting}
+\author{Vinesh Benny}
+\renewcommand\theenumii{\roman{enumii}}
+\renewcommand\labelenumii{\theenumii}      %This changes the labelling for second level of enum globally. Should use enumitem instead.
+
+\renewcommand{\qedsymbol}{$ \blacksquare $}
+
+\definecolor{correct}{RGB}{37,150,190}
+
+\mdfsetup{%
+	middlelinecolor=blue!40,
+	middlelinewidth=1pt,
+	backgroundcolor=blue!25!purple!10!,
+	roundcorner=5pt,
+	%	innerleftmargin=1cm,
+	%	innerrightmargin=1cm
+}
+
+%\usepackage{fourier}
+\renewcommand{\rmdefault}{bch}
+%\usepackage[sfdefault]{roboto}  %% Option 'sfdefault' only if the base font of the document is to be sans serif
+%\usepackage[T1]{fontenc}
+%\renewcommand{\familydefault}{\sfdefault}
+
+%\pagecolor[rgb]{0,0,0} %black    % to change page to night mode
+%\color[rgb]{0.5,0.5,0.5} %grey
+
+\begin{document}
+\begin{enumerate}
+	\item (Blitzstein: \S 1, Q3) Fred is planning to go out to dinner each night of a certain week, Monday through Friday, with each dinner being at one of his favorite ten restaurants.
+	\begin{enumerate}
+		\item How many possibilities are there for Fred’s schedule of dinners for that week, if Fred is not willing to eat at the same restaurant more than once?
+			\begin{mdframed}
+				This means that he has one less choice than the day before. i.e. $ 10 \cdot 9 \cdot 8 \cdot 7 \cdot 6 = 30240$ possibilities.
+			\end{mdframed}
+		\item How many possibilities are there for Fred’s schedule of dinners for that week, if Fred is willing to eat at the same restaurant more than once, but not twice in a row (or more)?
+			\begin{mdframed}
+				This means for every day after the first one he can only pick from 9 restaurants (excluding the one from the previous day). i.e. $ 10 \cdot 9 \cdot 9 \cdot 9 \cdot 9 = 65610$ possibilities.
+			\end{mdframed}
+	\end{enumerate}
+
+	\item (Blitzstein: \S 1, Q4) A \emph{round-robin tournament} is being held with $ n $ tennis players; this means that every player will play against every other player exactly once.
+		\begin{enumerate}
+			\item How many games are played in total?
+				\begin{mdframed}
+					$ \binom{n}{2} $ games will be played in total, since no games must be distinct pairs.
+				\end{mdframed}
+			\item How many possible outcomes are there for the tournament (the outcomes list who won and who lost for each game).
+				\begin{mdframed}
+					For each game (win/loss), so total number of outcomes is $ 2^{\binom{n}{2}} $.
+				\end{mdframed}
+		\end{enumerate}
+
+	\item (Blitzstein: \S 1, Q5) A \emph{knock-out} tournament is being held with $ 2^n $ players. This means that for each round, the winners move on to the next round and the losers are eliminated, until only one person remains. For example, if initially there are $ 2^4 = 16 $ players, then there are 8 games in first round, then the 8 winners move on to round 2, then the 4 winners move on to round 3, then the 2 winners move in to round 4, the winner of which is declared the winner of the tournament. E.g. see below:
+		\begin{enumerate}
+			\item How many rounds are there for general $ 2^n $ players?
+				\begin{mdframed}
+					There are $ n $ rounds for $ 2^n $ players.
+				\end{mdframed}
+			\item Count how many games are played in total, by adding up the number of games in each round (Hint: it is a geometric series).
+				\begin{mdframed}
+					Counting from the final outwards, for each round there are $ 2^{\text{round}} $ games.\\
+					i.e. The sum is $ S_n = 1 + 2 + 2^2 + \cdots + 2^n $. This is a geometric series with $ a = 1 $ and $ r = 2 $, and as such, its sum is $ S_n = \frac{1\left( 2^n - 1 \right)}{2 -1} = 2^n - 1$ games in total.
+				\end{mdframed}
+			\item Count how many games are played in total, by considering the number of players that need to be eliminated.
+				\begin{mdframed}
+					Since only one player can win the tournament, this means that there must be $ 2^n - 1 $ players eliminated. And since for each game one player gets eliminated, there must be $ 2^n - 1 $ games in total.
+				\end{mdframed}
+			\item Consider a knock-out tournament with $ n \geq 2 $ where the two best players in the world participate. Assume these two players always win other players. If they are randomly assigned in the tournament table, what are the chances they will meet in the final (but not before)?
+		\end{enumerate}
+\end{enumerate}
+\end{document}
