@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.17)  27 SEP 2021 22:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.17)  29 SEP 2021 14:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -526,6 +526,9 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \tcb@out=\write4
 \tcb@record@out=\write5
 )
+(/usr/local/texlive/2020/texmf-dist/tex/latex/cancel/cancel.sty
+Package: cancel 2013/04/12 v2.2 Cancel math terms
+)
 (/usr/local/texlive/2020/texmf-dist/tex/latex/mdframed/mdframed.sty
 Package: mdframed 2013/07/01 1.9b: mdframed
 
@@ -868,13 +871,13 @@ This may cause the page layout to be inconsistent, however.
 ]
 (./PS3_solutions.aux) ) 
 Here is how much of TeX's memory you used:
- 18599 strings out of 480608
- 369822 string characters out of 5903630
- 636834 words of memory out of 5000000
- 34125 multiletter control sequences out of 15000+600000
+ 18629 strings out of 480608
+ 370271 string characters out of 5903630
+ 638695 words of memory out of 5000000
+ 34151 multiletter control sequences out of 15000+600000
  543624 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 65i,16n,103p,1022b,1190s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 65i,20n,103p,1022b,1190s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base
 /8r.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/bitstrea/charter/bchr8a
 .pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.p
@@ -884,11 +887,13 @@ b></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></us
 r/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
 ocal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
-cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on PS3_solutions.pdf (1 page, 86017 bytes).
+cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></u
+sr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
+>
+Output written on PS3_solutions.pdf (1 page, 88204 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 52 PDF objects out of 1000 (max. 8388607)
+ 38 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
