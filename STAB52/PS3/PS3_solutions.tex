@@ -1,0 +1,89 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amsthm, amssymb, mathtools, commath}
+\usepackage{datetime, geometry, xcolor, tcolorbox, graphicx, calc,
+	%enumitem
+}
+\usepackage[tikz]{mdframed}
+\usepackage{tikz}
+
+\geometry{
+	right=0.5in,
+	left=0.5in,
+	top=1in,
+	bottom=0.8in
+}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+
+\fancyhf{}
+\lhead{Problem Set 3. Conditional Probability \& Bayes Rule}
+\rhead{Vinesh Benny}
+\rfoot{\thepage}
+
+%\renewcommand{\headrulewidth}{0pt}
+
+\title{STAB52 -- Problem Set 2. Counting}
+\author{Vinesh Benny}
+\renewcommand\theenumii{\roman{enumii}}
+\renewcommand\labelenumii{\theenumii}      %This changes the labelling for second level of enum globally. Should use enumitem instead.
+
+\renewcommand{\qedsymbol}{$ \blacksquare $}
+
+\definecolor{correct}{RGB}{37,150,190}
+
+\mdfsetup{%
+	middlelinecolor=blue!40,
+	middlelinewidth=1pt,
+	backgroundcolor=blue!25!purple!10!,
+	roundcorner=5pt,
+	%	innerleftmargin=1cm,
+	%	innerrightmargin=1cm
+}
+
+%\usepackage{fourier}
+\renewcommand{\rmdefault}{bch}
+%\usepackage[sfdefault]{roboto}  %% Option 'sfdefault' only if the base font of the document is to be sans serif
+%\usepackage[T1]{fontenc}
+%\renewcommand{\familydefault}{\sfdefault}
+
+%\pagecolor[rgb]{0,0,0} %black    % to change page to night mode
+%\color[rgb]{0.5,0.5,0.5} %grey
+
+\begin{document}
+\begin{enumerate}
+	\item Suppose we deal five cards from an ordinary 52-card deck.
+	\begin{enumerate}
+		\item What is the conditional probability that all five cards are spades, given that at least four of them are spades?
+			\begin{mdframed}
+				\begin{align*}
+					P\left( \text{All 5 are spades } | \text{ At least 4 spades} \right) &= \frac{P\left( \text{All 5 are spades} \right)}{P\left( \text{4 spades + 1 other card} \right) + P\left( \text{All 5 are spades} \right)}\\
+					&= \frac{ \frac{\binom{13}{5}}{\binom{52}{5}} }{ \frac{\binom{13}{4}  \binom{39}{1}}{\binom{52}{5}} + \frac{ \binom{13}{5}}{\binom{52}{5}} }\\
+					&= \frac{\binom{13}{5}}{\binom{13}{4}  \binom{39}{1} + \binom{13}{5}}\\
+					\Aboxed{&= \frac{3}{68}}
+				\end{align*}
+			\end{mdframed}
+		\item What is the conditional probability that the hand contains no pairs, given that it contains no spades?
+			\begin{mdframed}
+				$ P\left( \text{Containing no spades} \right) = \frac{\binom{39}{5}}{\binom{52}{5}}$. $ P\left( \text{Containing no pairs and no spades} \right) $ means that for the first card chosen, any of 39 cards can be chosen, then for the second card, any of 36 cards can be chosen (excluding the other 3 cards that can make previous card a pair), etc.\\
+				i.e. $ P\left( \text{Containing no pairs and no spades} \right) = \frac{39}{52} \cdot \frac{36}{51} \cdot \frac{33}{50} \cdot \frac{30}{49} \cdot \frac{27}{48} = \frac{8019}{66640}$\\
+				$ \therefore  P\left( \text{Containing no pairs \emph{given} no spades} \right) = \frac{\frac{8019}{66640}}{\frac{\binom{39}{5}}{\binom{52}{5}}} \boxed{= \tfrac{2673}{4921}}$
+			\end{mdframed}
+	\end{enumerate}
+
+	\item (Q6 on p.84 From B\&H)\\
+	A hat contains 100 coins, where 99 are fair but one is double-headed (always landing Heads). A coin is chosen uniformly at random. The coin is flipped 7 times, and it lands Heads all 7 times. Given this information, what is the probability that the chosen coin is double-headed?
+		\begin{mdframed}
+			From description: $ P\left( \text{1-sided coin} \right) = \frac{99}{100}$, $ P\left( \text{2-sided coin} \right) = \frac{1}{100} $, $ P\left( \text{All heads $ | $ 1-sided coin} \right) = \frac{1}{2^7}$ and \\
+			$ P\left( \text{All heads $ | $ 2-sided coin} \right) = 1$
+			\begin{align*}
+				P\left( \text{2-sided coin $ | $ All heads} \right) &= \frac{P\left( \text{All heads $ | $ 2-sided coin} \right) P\left( \text{2-sided coin} \right)}{P\left( \text{H $ | $ 2-sided coin} \right) P\left( \text{2-sided coin} \right) + P\left( \text{H $ | $ 1-sided coin} \right)P\left( \text{1-sided coin} \right)}\\
+				&= \frac{1 \frac{1}{100}}{1 \frac{1}{100} + \frac{1}{2^7}\frac{99}{100}}\\
+				&= \frac{\frac{1}{100}\left( 1 \right)}{\frac{1}{100}\left( 1 + \frac{99}{2^7} \right)}\\
+				\Aboxed{&= \tfrac{2^7}{2^7 + 99}}
+			\end{align*}
+		\end{mdframed}
+\end{enumerate}
+\end{document}
