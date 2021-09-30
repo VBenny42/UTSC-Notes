@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.17)  29 SEP 2021 14:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.2.17)  29 SEP 2021 20:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -856,7 +856,7 @@ Package mdframed Info: mdframed detected package amsthm
  changed the theorem header of amsthm
 (mdframed)              on input line 79.
 
-Overfull \hbox (17.31029pt too wide) detected at line 86
+Overfull \hbox (7.78384pt too wide) detected at line 86
 []
  []
 
@@ -890,7 +890,7 @@ ocal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
 cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/latxfont/line10.pfb></u
 sr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 >
-Output written on PS3_solutions.pdf (1 page, 88204 bytes).
+Output written on PS3_solutions.pdf (1 page, 88194 bytes).
 PDF statistics:
  52 PDF objects out of 1000 (max. 8388607)
  38 compressed objects within 1 object stream

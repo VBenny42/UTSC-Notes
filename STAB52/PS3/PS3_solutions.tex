@@ -76,10 +76,10 @@
 	\item (Q6 on p.84 From B\&H)\\
 	A hat contains 100 coins, where 99 are fair but one is double-headed (always landing Heads). A coin is chosen uniformly at random. The coin is flipped 7 times, and it lands Heads all 7 times. Given this information, what is the probability that the chosen coin is double-headed?
 		\begin{mdframed}
-			From description: $ P\left( \text{1-sided coin} \right) = \frac{99}{100}$, $ P\left( \text{2-sided coin} \right) = \frac{1}{100} $, $ P\left( \text{All heads $ | $ 1-sided coin} \right) = \frac{1}{2^7}$ and \\
-			$ P\left( \text{All heads $ | $ 2-sided coin} \right) = 1$. Therefore, by Bayes' Theorem,
+			From description: $ P\left( \text{1-head coin} \right) = \frac{99}{100}$, $ P\left( \text{2-head coin} \right) = \frac{1}{100} $, $ P\left( \text{All heads $ | $ 1-sided coin} \right) = \frac{1}{2^7}$ and \\
+			$ P\left( \text{All heads $ | $ 2-head coin} \right) = 1$. Therefore, by Bayes' Theorem,
 			\begin{align*}
-				P\left( \text{2-sided coin $ | $ All heads} \right) &= \frac{P\left( \text{All heads $ | $ 2-sided coin} \right) P\left( \text{2-sided coin} \right)}{P\left( \text{H $ | $ 2-sided coin} \right) P\left( \text{2-sided coin} \right) + P\left( \text{H $ | $ 1-sided coin} \right)P\left( \text{1-sided coin} \right)}\\
+				P\left( \text{2-head coin $ | $ All heads} \right) &= \frac{P\left( \text{All heads $ | $ 2-head coin} \right) P\left( \text{2-head coin} \right)}{P\left( \text{H $ | $ 2-head coin} \right) P\left( \text{2-head coin} \right) + P\left( \text{H $ | $ 1-head coin} \right)P\left( \text{1-head coin} \right)}\\
 				&= \frac{1 \frac{1}{100}}{1 \frac{1}{100} + \frac{1}{2^7}\frac{99}{100}}\\
 				&= \frac{\cancel{\frac{1}{100}}\left( 1 \right)}{\cancel{\frac{1}{100}}\left( 1 + \frac{99}{2^7} \right)}\\
 				\Aboxed{&= \tfrac{2^7}{2^7 + 99}}
