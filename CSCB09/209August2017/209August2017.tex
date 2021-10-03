@@ -1,0 +1,181 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\usepackage{amstext}
+
+\usepackage{amsthm}
+\usepackage{color, fullpage, hyperref}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{commath}
+
+\usepackage[table]{xcolor} 
+\usepackage{makecell}
+
+\pagecolor[rgb]{0,0,0} %black    % to change page to night mode
+\color[rgb]{0.5,0.5,0.5} %grey
+
+\usepackage{graphicx}
+\usepackage{tikz, pgfplots, hf-tikz}
+\pgfplotsset{compat=1.17}
+\allowdisplaybreaks
+\renewcommand\qedsymbol{$\blacksquare$}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\tcbuselibrary{fitting}
+\usepackage{empheq}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{fancyvrb}
+
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+\begin{enumerate}
+	\item 
+		\begin{enumerate}
+			\item Write a shell script which reads zero or more integers from the standard input, one per line, and outputs their sum. You can assume that the input is correctly-formed.\\
+			Examples, if the script is in a file named ``add", where the `\$' is the shell prompt:\begin{Verbatim}
+	$ (echo 2; echo 3; echo 6) | sh add
+	11
+	$ echo 2 | sh add
+	2
+	$ sh add </dev/null
+	0
+	$\end{Verbatim}
+			\lstinputlisting[language=sh]{sum1.sh}
+			
+			\item Write a shell script which takes zero or more integers as command-line arguments and outputs their sum. You can assume that all command-line arguments are valid integers.\\
+			Examples:\begin{Verbatim}
+	$ sh add 2 3 6
+	11
+	$ sh add 2
+	2
+	$ sh add
+	0
+	$\end{Verbatim}
+				\lstinputlisting[language=sh]{sum2.sh}
+		\end{enumerate}
+	
+	\newpage
+	\item Write a complete shell script which behaves as follows. It must be run with at least one argument. Arguments are considered to be plain files. Appropriate messages should be printed for files which can't be read (by using unix tools appropriately so as to generate messages).\\
+	The output of your shell script is the size in bytes of the largest of the files, with the file name. If there is a tie for largest, output any one of the files.\\
+	Example session, if your script is in a file named ``largest":
+	\begin{Verbatim}
+	$ sh largest filel file2 file3
+	14680 file1
+	$
+	\end{Verbatim}
+		\lstinputlisting[language=sh]{largest.sh}
+		
+	\item How many groups are you in? The output of the "id" command looks like this (all on one line):\\
+	\verb|uid=123(leephy98) gid=1008(cstudent) groups=1008(cstudent),517(csc209h),525(csc263h)|
+		\begin{lstlisting}[language=sh]
+	id | cut -d " " -f 3 | tr "," "\n" | wc -l\end{lstlisting}
+
+	\newpage
+	\item There are three different times in an inode in the unix filesystem: the mtime (last-modified time), the atime (last-accessed time) , and the ctime (last inode change time) . Suppose that there is a plain file named ..abc" in the current directory:
+	\begin{enumerate}
+		\item Write a shell command which will update the mtime of ``abc" (i.e. set it to the current time).
+		\begin{lstlisting}[language=sh]
+			echo "" >> abc # Adds newline to abc\end{lstlisting}
+		\item Write a shell command which will update the atime of ``abc", but not change its mtime or ctime.
+		\begin{lstlisting}[language=sh]
+			cat abc # Prints content but does not modify or change\end{lstlisting}
+		\item Write a shell command which will update the ctime of ``abc", but not change its mtime or atime.
+		\begin{lstlisting}[language=sh]
+			chmod a+r abc # Changes permission of file, but does not modify or access\end{lstlisting}
+		\item Write a shell command which will update the mtime of the current directory.
+		\begin{lstlisting}[language=sh]
+			touch xyz | rm xyz # Adds and deletes a file from cd, thus modifying it\end{lstlisting}
+		\item Write a shell command which will update the atime of the current directory.
+		\begin{lstlisting}[language=sh]
+			ls # Accesses directory\end{lstlisting}			
+		\item Write a shell command which will update the ctime of the current directory.
+		\begin{lstlisting}[language=sh]
+			chmod o-x . # Changes permissions of directory\end{lstlisting}
+	\end{enumerate}
+
+	\newpage
+	\item Write a partial version of the \textit{test} command in C. Your program will implement only the following features of \textit{test}:\begin{Verbatim}
+	test -f file 
+	test -d file 
+	test -s file
+	\end{Verbatim}
+	``test -f file" tests whether the file exists and is a plain file,\\
+	``test -d file" tests whether the file exists and is a directory,\\
+	``test -s file" tests whether the file exists and is a plain file AND is non-zero-sized.
+		\lstinputlisting[language=c]{mytest.c}
+		
+	\newpage
+	\item Write a modified and partial version of the \textit{tr} command in C. Your program requires at least two arguments (i.e. argc$ \geq $3), where invocations will look like this:\begin{Verbatim}
+	tr e f
+	tr e f file1 file2
+	tr 0123456789 X file
+	\end{Verbatim}
+	The first argument is a string of one or more characters to translate. All of these characters are translated to the single character which is the second argument. For this exam question, you do not need to check that argv[2] is of length 1 (although you do need to check that it exists, by checking argc).\\
+	\hspace*{1cm} After these two mandatory arguments, your program takes zero or more files in the usual way, where zero filename arguments means to read the standard input. As always, the output is to the standard output.\\
+	\hspace*{1cm} You may want to use ``strchr()" to check whether a character occurs in a string.
+		\lstinputlisting[language=c]{mytr.c}
+		
+	\newpage
+	\item Write a C program which recursively traverses the entire filesystem, starting from the root directory. It adds together the sizes, in bytes, of all files in the filesystem, including special files (including directories), and outputs this number. (After a successful stat() or lstat() call, the size of the file in bytes is present in the struct member 	``st\_size".) You can assume that the total can be represented in an int.\\
+	\hspace*{1cm}If a complete file path name reaches 1000 characters or more in length, your program may terminate with an appropriate error message; but it does have to check, and it may not exceed array bounds.
+		\lstinputlisting[language=c]{sum.c}
+		
+	\newpage
+	\item There is a computation which takes a long time to run, but is broken up into five roughly equal parts which can run simultaneously.\\
+	\hspace*{1cm}Write a function in C (not a complete program; no main()) which forks five times; each of the child processes runs compute(n) for a different 0$ \geq $n$ \geq $5; and your function wait()s for all five child processes before returning.\\
+	\hspace*{1cm}(There's no exec(); all of this happens within one program.)\\
+	\hspace*{1cm}You don't have to keep track of process ID numbers; you can assume for this question that there are no other child processes, so a wait() call will always wait for one of the five processes you have spawned.
+		\lstinputlisting[language=c]{fork_fn.c}
+		
+	\newpage
+	\item The program /local/t3 writes some data to file descriptor 7. Write a complete C program which execs /local/t3 with its file descriptor 7 redirected to the file "bar" (in the current directory) (the standard file descriptors 0, 1, and 2 are left alone). (All appropriate error checking is required.)
+		\lstinputlisting[language=c]{bar_redir.c}
+		
+	\newpage
+	\item The following program is a server which reads one byte (character) from each client, echoes it
+	back, and drops the connection.
+	\lstinputlisting[language=c]{serverqn.c}
+	\newpage
+	\begin{enumerate}
+		\item  Regarding the line ``r.sin\_port = htons(2000);" (line 23), what would happen if instead we simply wrote ``r.sin\_port = 2000;"?\\
+		The network protocols used need to have the port number stored in network order, which htons() does for us, if 2000 was used alone, the port number would be stored in host order which would cause networking problems.
+		\item On which line number will this program be blocked when no client is connected?\\
+		36
+		\item On which line number will this program be blocked when a client is connected but has not yet transmitted its byte?\\
+		40
+		\item In the switch statement beginning on line 40, under what circumstances will neither of the cases match? What will read()'s return value be, and why?\\
+		When connection is broken from client's side and no data is available, read will return 0 and neither of the cases will match.
+		\item Change the program in place so that it mostly functions as it currently does, except that if the byte transmitted from the client is a control-B (ASCII value 2), instead of sending the control-B back it sends the string ``ha!" plus a network newline.
+		\lstinputlisting[language=c]{serverqn fixed.c}
+	\end{enumerate}
+	
+\end{enumerate}
+\end{document}

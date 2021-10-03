@@ -1,0 +1,130 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\usepackage{amstext}
+
+\usepackage{amsthm}
+\usepackage{color, fullpage, hyperref}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{commath}
+
+\usepackage[table]{xcolor} 
+\usepackage{makecell}
+
+\usepackage{graphicx}
+\usepackage{tikz, pgfplots, hf-tikz}
+\pgfplotsset{compat=1.17}
+\allowdisplaybreaks
+\renewcommand\qedsymbol{$\blacksquare$}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\tcbuselibrary{fitting}
+\usepackage{empheq}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{fancyvrb}
+
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+\begin{enumerate}
+	\item All of the ‘‘accounts’’ on a unix/linux system are represented by a file named ‘‘/etc/passwd’’.
+	Lines in /etc/passwd look like this:\begin{lstlisting}
+		ajr:x:300003:500:Alan Rosenthal:/cmshome/ajr:/bin/bash\end{lstlisting}
+	The sixth field is the home directory.
+	The cut command takes a ``-d" option which says what the field separator is, so the sixth field could be extracted with ``cut -d: -f6".\\
+	\hspace*{1cm}Write a shell script which outputs the percentage of the entries in /etc/passwd which have a home directory somewhere under /cmshome. If useful, you can assume that there are no spaces in any home directory names.\\
+	\hspace*{1cm}	Possible hint: Remember the case statement, which can match ``glob" patterns such as ``/cmshome/*".
+		\lstinputlisting[language=sh]{q1.sh}
+		
+	\newpage
+	\item A programmer writes the statement:\begin{lstlisting}[language=sh]
+	test "$x" = "$y"\end{lstlisting}
+	as an `if' condition. Remember that `=' is a string comparison in \textit{test}.
+		\begin{enumerate}
+			\item Why are the double quotes necessary? Explain by giving possible values for the variables $ x $ and $ y $ such that ``test \$x = \$y" would yield a syntax error from test, but the above version with the double quotes would work as expected.\\
+				The double quotes are necessary for when either variable has spaces. If there were no double quotes and the variable had spaces, test would give a syntax error.\\
+				x is: test test\\
+				y is: test test
+			\item Using a version of test written along the lines of our ‘‘simpletest’’, the programmer gets a syntax error anyway, even with the double quotes! That’s because the variable x contained the two character string ‘‘-f’’, so ‘‘=’’ was considered to be a file name, and the value in y was then a syntax error. How would you change the above test statement to protect against this possibility?
+				\lstinputlisting[language=sh]{q2.sh}
+		\end{enumerate}
+	
+	\newpage
+	\item State three distinct items of information (data) in the inode of a file in the unix filesystem (you needn’t give their names from $ < $sys/stat.h$ > $ ; just describe them with a few words each).
+		\begin{enumerate}
+			\item atime: the last time file was accessed
+			\item User ID: the user ID of owner of file
+			\item Filesize: size of file in bytes
+		\end{enumerate}
+	
+	\item Write a complete C program (except that you can omit the \#includes) which takes one mandatory command-line argument, which it expects to be a directory. Other than ‘‘.’’ and ‘‘..’’, that directory is expected to contain only plain files. Your program reads all of the files in that directory and outputs the total byte count.\\
+	You must do all usual error checking and output appropriate error messages.\\
+	Hint: If you chdir() to the directory, you can use the file names from readdir() as is.
+		\lstinputlisting[language=c]{dirread.c}
+		
+	\newpage
+	\item The diff program contains a sophisticated algorithm which decides which lines to compare to which. For a ‘‘trivial diff’’ program for this exam question, we evade this algorithm by assuming that files all have at most one line (n.b. \textit{at most}; they could still be empty).\\
+	Write a complete C program (except that you can omit the \#includes) which takes two filenames (no other possibilities, no options) and behaves as diff except that it reads only the first line (if available). You can assume that the first line is a maximum of 1000 chars long, although you may not exceed array bounds even if it isn’t. And all usual error checking and error messages are required.\\
+	If the files are identical, there is no output. Otherwise, if the first file is empty and the second consists of the line ‘‘foo’’, \textit{diff} will output:
+	\begin{lstlisting}
+		0a1
+		> foo\end{lstlisting}
+	If the first file consists of the line ‘‘foo’’ and the second file is empty, \textit{diff} will output:
+	\begin{lstlisting}
+		1d0
+		< foo\end{lstlisting}
+	If both files consist of one line but it is different, \textit{diff} will output:
+	\begin{lstlisting}
+		1c1
+		< foo
+		---
+		> bar\end{lstlisting}
+		\lstinputlisting[language=c]{diff.c}
+		
+	\newpage
+	\item Write a complete C program (except that you can omit the \#includes) which calls fork(); the child executes the command ‘‘tr e f $ <$file1 $ >$file2’’ (without using \textit{sh} or system()); and the parent calls wait() and outputs the child’s exit status in the exact format ‘‘child process exit status was \%d’’. You may hard-code the fact that ‘tr’ is /usr/bin/tr. All usual error checking and error message reporting is required.
+		\lstinputlisting[language=c]{mytr.c}
+		
+	\newpage
+	\item Write a complete C program (except that you can omit the \#includes) which listens on port 2000 and receives messages, as follows: Anyone can connect to port 2000 and send data, and that data is output on the standard output, without alteration. You do not need to worry about the network newline conversion.\\
+	
+	Once a client connects, you read all data from it in a loop until end-of-file (caused by the client disconnecting), then you loop around for the next client; you do not need to handle multiple clients simultaneously.
+		\lstinputlisting[language=c]{p2000.c}
+		
+	\newpage
+	\item From a high-level view, main() is the first thing executed in a C program. But there has to be some code which calls main().\\
+	When your program is executed in unix, it starts executing at a certain address. Code known as ‘‘crt0’’ (for ‘‘C runtime, the very first thing’’) sets up various things needed by the C library, and calls main() with the appropriate arguments.\\
+	The last line of crt0.c (before a closing brace) is usually something very similar to:\\
+		\hspace*{1cm} \verb|exit(main(argc, argv));|\\
+	What is this line doing?\\
+	
+		This line flushes all open file descriptors for crt0 and calls main with the required arguments all in one. (Not sure about this one)
+\end{enumerate}
+\end{document}

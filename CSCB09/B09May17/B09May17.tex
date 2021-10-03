@@ -1,0 +1,265 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\usepackage{amstext}
+
+\usepackage{amsthm}
+\usepackage{color, fullpage, hyperref}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{commath}
+
+\usepackage[table]{xcolor}
+\usepackage{makecell}
+
+%\pagecolor[rgb]{0,0,0} %black    % to change page to night mode
+%\color[rgb]{0.5,0.5,0.5} %grey
+
+\usepackage{graphicx}
+\usepackage{tikz, pgfplots, hf-tikz}
+\pgfplotsset{compat=1.17}
+\allowdisplaybreaks
+\renewcommand\qedsymbol{$\blacksquare$}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\tcbuselibrary{fitting}
+\usepackage{empheq}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{fancyvrb}
+
+\usepackage{enumerate}
+\usepackage{soul}
+%\usepackage{alltt}
+
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\definecolor{correct}{RGB}{37,150,190}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=5pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+\tcbset{
+	colback=blue!25!purple!10!,
+	colframe=blue!40}
+%\sethlcolor{correct}
+
+%\renewcommand{\theenumii}{\Alph{enumii}}
+
+\usepackage{xifthen}
+\newcommand{\mycheckbox}[1]{%
+	\ifthenelse{\equal{#1}{Y}}% Y means work as intended, otherwise error
+	{\begin{minipage}[t]{0.23\textwidth}
+			\item[$\boxtimes$] Works as intended
+		\end{minipage}
+		\begin{minipage}[t]{0.5\textwidth}
+			\item[$\square$] Error
+		\end{minipage}}% #1 = #2 -> [#1]
+	{\begin{minipage}[t]{0.23\textwidth}
+			\item[$\square$] Works as intended
+		\end{minipage}
+		\begin{minipage}[t]{0.1\textwidth}
+			\item[$\boxtimes$] Error
+		\end{minipage}}% [#1,#2]
+}
+
+\newcommand{\trueorfalse}[1]{%
+	\ifthenelse{\equal{#1}{T}}% Y means work as intended, otherwise error
+	{\begin{minipage}[t]{0.1\textwidth}
+			\item[$\boxtimes$] True
+		\end{minipage}
+		\begin{minipage}[t]{0.1\textwidth}
+			\item[$\square$] False
+	\end{minipage}}% #1 = #2 -> [#1]
+	{\begin{minipage}[t]{0.1\textwidth}
+			\item[$\square$] True
+		\end{minipage}
+		\begin{minipage}[t]{0.1\textwidth}
+			\item[$\boxtimes$] False
+	\end{minipage}}% [#1,#2]
+}
+
+\begin{document}
+\begin{enumerate}
+	\item Some of the code fragments below have a problem. For each fragment indicate whether the code works as intended or whether there is an error (logical error, compile-time error/warning, or runtime error). Assume all programs are compiled using the C99 standard. For this question, we’ll assume programs which do not terminate are errors as well. If there is an error in a fragment, explain \textbf{briefly} what is wrong in the box. We have intentionally omited the error checking of the system calls to simplify the examples. Do not report this as an error.
+		\begin{enumerate}
+			\item \begin{Verbatim}
+int x = 5;
+// checking whether x equals 6
+if ( x = 6 ) {
+	printf("x equals 6\n");
+}
+			\end{Verbatim}
+			\begin{tcolorbox}\hspace{0.47cm}\mycheckbox{N} \\
+				The \Verb|( x = 6 )| statement, does not check if \Verb|x| is \Verb|6|, but rather assigns \Verb|x| to \Verb|6|, so  \Verb|"x equals 6\n"| is always printed.\end{tcolorbox}
+			\vspace{1cm}
+			\item \begin{Verbatim}
+int x;
+//reading a value for x
+scanf("%d", &x);
+			\end{Verbatim}
+				\begin{tcolorbox}\hspace{0.47cm}\mycheckbox{Y}\end{tcolorbox}
+			\vspace{1cm}
+
+			\item \begin{Verbatim}
+struct student {
+	int age;
+	char *name; }
+// Increase the age of a student by amt.
+void increase_age(struct student s, int amt) {
+	s.age += amt;
+}
+int main() {
+	struct student rob;
+	rob.age = 10;
+	increase_age(rob, 5);
+	printf("%d should be 15\n", rob.age);
+}
+			\end{Verbatim}
+				\begin{tcolorbox}\hspace{0.47cm}\mycheckbox{N}\\
+					In \Verb|increase_age|, local changes are made to student \Verb|s|, so they are not reflected in \Verb|main|, therefore \Verb|rob|'s age will still be \Verb|10|.\end{tcolorbox}
+
+			\newpage
+			\item \begin{Verbatim}
+char * st = malloc(31);
+// reading a string into st
+// you may assume that not more than 30 characters are read
+scanf("%s", &st);
+			\end{Verbatim}
+				\begin{tcolorbox}\hspace{0.47cm}\mycheckbox{N}\\
+				\Verb|scanf| gets a pointer to a \Verb|char| pointer. \Verb|scanf("%s", st)| should be used instead.\end{tcolorbox}
+
+			\vspace{1cm}
+			\item \begin{Verbatim}
+#include <string.h>
+int main()
+{
+	char * st;
+	// copying "abc" into st
+	strcpy(st, "abc");
+	return 0;
+	Winter 2017
+}
+			\end{Verbatim}
+			\begin{tcolorbox}\hspace{0.47cm}\mycheckbox{N}\\
+			\Verb|st| does not point to any allocated memory for a \Verb|char| array so \Verb|strcpy| should fail.\end{tcolorbox}
+
+			\vspace{1cm}
+			\item \begin{Verbatim}
+char st1[] = "abc";
+char st2[] = "abc";
+if ( st1 == st2 )
+printf("Strings are identical");
+else
+printf("Not identical");
+			\end{Verbatim}
+			\begin{tcolorbox}\hspace{0.47cm}\\
+			\Verb|( st1 == st2 )| is only true when both pointers point to the same address. Even though both arrays have the same string, ``\Verb|Not identical|" would be printed. \Verb|(strcmp(st1, st2) == 0)| should be used instead to check if they are identical.\end{tcolorbox}
+		\end{enumerate}
+
+	\newpage
+	\item \textbf{\textit{I didn't do this one but here it is:}}\\
+		In this question you will write a function hash that will take as arguments the name of a file filename and a hash block size blocksize. It will then read the contents of file filename byte by byte and compute (and return) a hash with the size specified in blocksize. The hash you implement should be based on xor and your function should be able to handle text files as well as binary files. You can assume that blocksize passed to the function is a valid block size and that no error occur during any of the system calls you might make. You can also assume that any libraries you need have been included.\\
+		\begin{Verbatim}
+char *hash(char *filename, int blocksize) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+		\end{Verbatim}
+
+	\newpage
+	\item Suppose you want write a program with two processes that communicate through a pipe. Decide for each of the following statements whether they are correct or not:\\
+
+	You need to call pipe() before you call fork().
+	\begin{tcolorbox}\hspace{0.47cm}\trueorfalse{T}\end{tcolorbox}
+	\vspace{0.3cm}
+	You need to call fork() before you call pipe().
+	\begin{tcolorbox}\hspace{0.47cm}\trueorfalse{F}\end{tcolorbox}
+	\vspace{0.3cm}
+	You need to call pipe, but you don’t necessarily have to call fork.
+	\begin{tcolorbox}\hspace{0.47cm}\trueorfalse{T}\end{tcolorbox}
+	\vspace{0.3cm}
+	Pipes are uni-directional, which means that only the parent can read and only the child can write.
+	\begin{tcolorbox}\hspace{0.47cm}\trueorfalse{F} Child can read and parent write instead.\end{tcolorbox}
+	\vspace{0.3cm}
+	It is important to close the unused end of a pipe because otherwise the read end of the pipe will block STDIN.
+	\begin{tcolorbox}\hspace{0.47cm}\trueorfalse{F} Read end will block process until all writing ends are closed.\end{tcolorbox}
+	\vspace{0.3cm}
+	It is important to close the unused end of a pipe because otherwise the tobacco will spill out of the pipe ends left open.
+	\begin{tcolorbox}\hspace{0.47cm}\trueorfalse{T}\end{tcolorbox}
+	\vspace{0.3cm}
+	A read call will block if the pipe is empty.
+	\begin{tcolorbox}\hspace{0.47cm}\trueorfalse{T}\end{tcolorbox}
+	\vspace{0.3cm}
+	A write call will block if the pipe is full.
+	\begin{tcolorbox}\hspace{0.47cm}\trueorfalse{T}\end{tcolorbox}
+	\vspace{0.3cm}
+	A child inherits all the open file descriptors from the parent, including those corresponding to pipes.
+	\begin{tcolorbox}\hspace{0.47cm}\trueorfalse{T}\end{tcolorbox}
+
+	\newpage
+	\item Consider the following makefile:
+	\begin{Verbatim}
+
+FLAGS = -Wall -std=gnu99
+DEPENDENCIES = hash.h ftree.h
+
+all: fcopy
+
+fcopy: fcopy.o ftree.o hash_functions.o
+gcc ${FLAGS} -o $@ $^
+
+%.o: %.c ${DEPENDENCIES}
+gcc ${FLAGS} -c $<
+
+clean:
+rm *.o fcopy
+	\end{Verbatim}
+
+		Assume the directory that contains the makefile contains the following files (and no others):\\
+
+		hash.h ftree.h ftree.c fcopy.c hash functions.c.\\
+
+		Suppose the following commands are run one after the other. Fill in the table to show what files are created, deleted or modified as a result of running each command. If no files are created, deleted or modified after a particular command, write “NO CHANGE”.
+
+\end{enumerate}
+\end{document}

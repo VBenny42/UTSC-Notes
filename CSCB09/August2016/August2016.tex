@@ -1,0 +1,191 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\usepackage{amstext}
+
+\usepackage{amsthm}
+\usepackage{color, fullpage, hyperref}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{commath}
+
+\usepackage[table]{xcolor}
+\usepackage{makecell}
+
+\usepackage{graphicx}
+\usepackage{tikz, pgfplots, hf-tikz}
+\pgfplotsset{compat=1.17}
+\allowdisplaybreaks
+\renewcommand\qedsymbol{$\blacksquare$}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\tcbuselibrary{fitting}
+\usepackage{empheq}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{fancyvrb}
+
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=5pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+	\begin{enumerate}
+		\item Write shell commands to do the following:
+			\begin{enumerate}
+				\item Count the number of plain files in a system
+					\begin{lstlisting}[language=sh]
+ls / | wc -l\end{lstlisting}
+				\item Delete all the files in the current directory with the substring "sand". (In the file contents)
+					\lstinputlisting[language=sh]{sand.sh}
+
+				\item Assuming that the names of all files in current directory which start with `f' are of the form `f' followed by one or more digits, rename each of them to be one more than their current name. For example, ``f3" would be renamed to ``f4", and ``f9" would be renamed to ``f10"
+					\lstinputlisting[language=sh]{f_rename.sh}
+			\end{enumerate}
+
+\newpage
+		\item
+		Problem: The current directory contains a bunch of plain files whose names begin with a digit,
+		and a bunch of plain files whose names do not begin with a digit. Write shell commands to
+		output all of the words which contain a 'q', only from all of the files whose names begin with a digit. Each word appears only once in the output no matter how many times it appears in the file(s).
+			\lstinputlisting[language=sh]{q.sh}
+\newpage
+		\item
+			\begin{enumerate}
+				\item Write a shell script which reads zero or more integers from the standard input, one per line, and outputs their sum. You can assume that the input is correctly-formed.
+				Example:
+				\begin{verbatim}
+					(echo 2; echo 3; echo 4) | sh yourfile
+				\end{verbatim}
+			will output 9.
+					\lstinputlisting[language=sh]{sum1.sh}
+
+				\item Write a shell script which takes zero or more integers as command-line arguments and outputs their sum. You can assume that the command-line arguments are all valid integers.
+				Example:
+				\begin{verbatim}
+				sh yourfile 2 3 4
+			\end{verbatim}
+		 will output 9.
+		 			\lstinputlisting[language=sh]{sum2.sh}
+			\end{enumerate}
+\newpage
+
+		\item There are three different times in an inode in the unix filesystem: the mtime (last-modified time), the atime (last-accessed time) , and the ctime (last inode change time) . Suppose that there is a plain file named ..abc" in the current directory:
+			\begin{enumerate}
+				\item Write a shell command which will update the mtime of ``abc" (i.e. set it to the current time).
+					\begin{lstlisting}[language=sh]
+echo "" >> abc # Adds newline to abc\end{lstlisting}
+				\item Write a shell command which will update the atime of ``abc", but not change its mtime or ctime.
+					\begin{lstlisting}[language=sh]
+cat abc # Prints content but does not modify or change\end{lstlisting}
+				\item Write a shell command which will update the ctime of ``abc", but not change its mtime or atime.
+					\begin{lstlisting}[language=sh]
+chmod a+r abc # Changes permission of file, but does not modify or access\end{lstlisting}
+				\item Write a shell command which will update the mtime of the current directory.
+					\begin{lstlisting}[language=sh]
+touch xyz | rm xyz # Adds and deletes a file from cd, thus modifying it\end{lstlisting}
+				\item Write a shell command which will update the atime of the current directory.
+					\begin{lstlisting}[language=sh]
+ls # Accesses directory\end{lstlisting}
+				\item Write a shell command which will update the ctime of the current directory.
+					\begin{lstlisting}[language=sh]
+chmod o-x . # Changes permissions of directory\end{lstlisting}
+			\end{enumerate}
+
+		\newpage
+		\item This is normally an impossible situation:
+			\begin{lstlisting}[language=c]
+	void f(int *a)
+	{
+		// Do something with elements of the array `a'
+	}\end{lstlisting}
+			because normally we would need an additional parameter which is the size of the array. However in the calls, \begin{lstlisting}[language=c]
+	strcpy(a, b)\end{lstlisting}
+and \begin{lstlisting}[language=c]
+	pipe(f)\end{lstlisting}
+			there is no size parameter, How do these functions know how big their arrays are? There are three subquestions:
+				\begin{enumerate}
+					\item strcpy's first argument (the target of the copying) \\
+						strcpy will modify the array of the first argument so that it matches the characters of the string to be copied, and then adds a null terminator as the next element in array.
+					\item strcpy's second argument (the string to be copied)\\
+						This string must be a null-terminated string. This means that strcpy considers every character in the character array pointed to by the first argument until `\textbackslash 0' to be the string being copied. strcpy only works successfully on null-terminated strings.
+					\item pipe's argument\\
+						pipe's man page specifies that an int array of size 2 should be used as its argument.\\
+					\rule{6cm}{1pt}
+					\item Give an example of an additional, distinct situation where a function similar to `f' above knows how many elements there are in the array (or at least, how many elements to pay attention to) without a separate size parameter.\\
+						Any function that iterates through a linked list. (Functions that dealt with an array was wanted,  but I drew a blank)
+				\end{enumerate}
+
+			\newpage
+			\item Write a complete C program (except that you can omit the \#includes) which outputs all of its command-line arguments in order, one per line, but with each string reversed. Example session, where '\$' is the shell prompt: \begin{lstlisting}[language=c]
+	$ ./a.out once upon a time
+	ecno
+	nopu
+	a
+	emit
+	$\end{lstlisting}
+				\lstinputlisting[language=c]{reverse.c}
+
+			\newpage
+			\item Without using popen(), write a complete C program to exec /bin/date with its standard output redirected into a pipe. Your program will read from this pipe and output just the fifth character of date's output, and a newline. (Do not use a temporary file; use a pipe.)
+				\lstinputlisting[language=c]{datepipe.c}
+
+			\newpage
+			\item The following program is a server which reads one byte (character) from each client, echoes it
+			back, and drops the connection.
+				\lstinputlisting[language=c]{serverqn.c}
+			\newpage
+			\begin{enumerate}
+				\item  Regarding the line ``r.sin\_port = htons(2000);" (line 23), what would happen if instead we simply wrote ``r.sin\_port = 2000;"?\\
+					The network protocols used need to have the port number stored in network order, which htons() does for us, if 2000 was used alone, the port number would be stored in host order which would cause networking problems.
+				\item On which line number will this program be blocked when no client is connected?\\
+					36
+				\item On which line number will this program be blocked when a client is connected but has not yet transmitted its byte?\\
+					40
+				\item In the switch statement beginning on line 40, under what circumstances will neither of the cases match? What will read()'s return value be, and why?\\
+					When connection is broken from client's side and no data is available, read will return 0 and neither of the cases will match.
+				\item Change the program in place so that it mostly functions as it currently does, except that if the byte transmitted from the client is a control-B (ASCII value 2), instead of sending the control-B back it sends the string ``ha!" plus a network newline.
+					\lstinputlisting[language=c]{serverqn fixed.c}
+			\end{enumerate}
+
+		\newpage
+		\item Write a complete C program (except that you can omit the \#includes) which scans the current directory, and for each item in the current directory which is itself a directory, it forks and execs `Is' on that subdirectory. For example, if the current directory contains subdirectories `a' and `b', and plain files `c' and `d', your program will execute the commands ``ls a" and ``ls b".
+		(Note: For this exam question you must exec /bin/ls; you can't just perform its function yourself.)
+			\lstinputlisting[language=c]{myls.c}
+
+		\newpage
+		\item[Bonus qn]
+		There is a network protocol in which strings are terminated with the zero byte, just like in C. A C programmer noticed that the string is already formatted in memory with the terminating zero byte, so they decided to do something like
+		\begin{lstlisting}[language=c]
+	write(serverfd, s, strlen(s) + 1);\end{lstlisting}
+		thus writing not only the data bytes of the string, but also the terminating zero, as is expected in this particular protocol.
+		Unfortunately, they made a parenthesization mistake and instead wrote: \begin{lstlisting}[language=c]
+	write(serverfd, s, strlen(s + l));\end{lstlisting}
+		If `s' was the string ``good morning", exactly what was written to the socket?\\
+
+			``strlen(s+1)" would give the length of the string starting from `o' in ``good morning", i.e. 1 less than the length of the string ``good morning", therefore ``good mornin" would be written to the socket.
+	\end{enumerate}
+\end{document}

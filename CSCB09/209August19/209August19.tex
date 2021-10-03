@@ -1,0 +1,163 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\usepackage{amstext}
+
+\usepackage{amsthm}
+\usepackage{color, fullpage, hyperref}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{commath}
+
+\usepackage[table]{xcolor} 
+\usepackage{makecell}
+
+%\pagecolor[rgb]{0,0,0} %black    % to change page to night mode
+%\color[rgb]{0.5,0.5,0.5} %grey
+
+\usepackage{graphicx}
+\usepackage{tikz, pgfplots, hf-tikz}
+\pgfplotsset{compat=1.17}
+\allowdisplaybreaks
+\renewcommand\qedsymbol{$\blacksquare$}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\tcbuselibrary{fitting}
+\usepackage{empheq}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{fancyvrb}
+
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+\begin{enumerate}
+	\item Write shell commands to perform the following operations. Put some thought into making your answer simple; answers will be graded on quality, not just on whether they ‘‘work’’.\\
+	Please be careful to write single quotes and backquotes correctly to avoid misinterpretation.
+		\begin{enumerate}
+			\item Rename every file in the current directory whose name begins with a q so as to double the q. For example, ‘‘question’’ would be renamed to ‘‘qquestion’’.
+				\lstinputlisting[language=sh]{q1.sh}
+				
+			\item  The file /u/ajr/t contains zero or more integers, one per line. Output the sum of all of these integers plus 10. (For example, if the file is empty, the output would be 10, or if it contains ‘‘\Verb|2\n3\n|’’ the output would be 15.)
+				\lstinputlisting[language=sh]{q1sum.sh}
+				
+			\item The file /u/ajr/x contains a sample of ordinary English text. Output the total number of letters in this file. (That is, your answer differs from the output of ‘‘\Verb|wc </u/ajr/x|’’ because wc also counts digits, punctuation, newlines, etc.)
+				\lstinputlisting[language=sh]{q1wc.sh}
+		\end{enumerate}
+	
+	\item You meant to type ‘‘\Verb|grep fred bigfile|’’, but you accidentally typed ‘‘\Verb|grep fred|’’ and pressed return (enter). What will happen? What exactly is grep doing?\\
+		\hspace*{1cm} \Verb|grep| will search \Verb|stdin| for matches to ``fred"
+		
+	\newpage
+	\item A file named ‘‘pricelist’’ in the current directory contains item names and prices, looking like
+	this:\begin{Verbatim}
+	pop 150
+	sandwich 500
+	french fries 225
+	\end{Verbatim}
+
+		The prices are all in cents, so that all numbers are positive integers. The item and price are always separated by a space, but the item may contain spaces in its name, so the separator is the \textit{last} space on the line. (There cannot be a space after the price.)
+			\begin{enumerate}
+				\item Write shell commands to output the list of all item names which occur more than once in this file. (Any such duplication is an error; these shell commands check for this error.)
+					\lstinputlisting[language=sh]{q3.sh}
+					
+				\item Write a shell script which takes two mandatory command-line arguments, where the first is an item name and the second is a quantity. The output of the shell script is the total price (in cents). For example, with the above file, ‘‘sh script pop 2’’ would output 300.
+				You can assume that the item does not occur more than once in the file (i.e. the part ‘a’ error check has already been done before putting this pricelist file into production), but you can’t assume that the item occurs; you need to check for this and give an error message if applicable.
+					\lstinputlisting[language=sh]{q3b.sh}
+			\end{enumerate}
+		
+	\newpage
+	\item Write a complete C program which takes no command-line arguments (you don’t have to declare the argc and argv arguments to main()) and functions like ‘‘\Verb|tr a-z A-Z|" -- that is, stdin is copied to stdout with all letters capitalized and all other characters copied unmodified.
+		\lstinputlisting[language=c]{q4.c}
+	
+	\item Write a complete C program which takes two mandatory command-line arguments. The first is a string and the second is an integer. The string is output that many times.\\
+		Example, where `\$’ is the shell prompt:\begin{Verbatim}
+	$ ./a.out hello 3
+	hello
+	hello
+	hello
+	$
+		\end{Verbatim}
+		\lstinputlisting[language=c]{q5.c}
+		
+	\newpage
+	\item Write a complete C program which attempts to fopen() files named ‘‘1’’, ‘‘2’’, and so on up to ‘‘100’’ inclusive. When the fopen() succeeds, it checks whether the first character in the file is a ‘\#’. When the fopen() fails, it just loops around to the next file without emitting any error message (i.e. it’s ok for these files not to exist). At the end of your program’s execution, it outputs the total count of files (out of those examined) which do indeed have an ‘\#’ as their first character.
+		\lstinputlisting[language=c]{q6.c}
+		
+	\newpage
+	\item Write a complete C program which takes a mandatory directory name argument as argv[1]. It reads the directory (non-recursively) and creates a linked list of the names in it in the following data structure (the items can be in any order):\begin{Verbatim}
+	struct file {
+		char *name;
+		struct file *next;
+	};
+	\end{Verbatim}
+	Do not include ‘‘.’’ and ‘‘..’’ in the linked list.\\
+	The name is simply the base file name in the directory; you don’t have to prepend the path name. Space for the name must be malloc’d. After doing the above, we would presumably go on to \textit{use} this data structure, but for the purposes of this exam, your program will simply exit.
+		\lstinputlisting[language=c]{q7.c}
+
+	\newpage
+	\item \begin{enumerate}
+		\item In the unix filesystem, when you create a new file, its mtime and ctime are initialized to the current time. What do you think the atime should be set to? Propose the rule for the initialization of the atime and justify your decision extremely briefly.\\
+		\hspace*{1cm} atime should be set to the current time as well, since the os ``accesses" the file when creating it.
+		
+		\item What is the link count on a new file? (Keep in mind that a directory is a kind of file.)\\
+		\hspace*{1cm} A new file has one link, while a new directory has an extra link which is `..' in its directory.
+	\end{enumerate}
+	\vspace{1in}
+%	\newpage
+	\item The program named ‘‘/u/ajr/crazy’’ does something useful, but causes problems when run automatically because it might read from stdin and/or write to stdout or stderr.\\
+	\hspace*{1cm}We want to suppress the i/o behaviour by connecting all of stdin, stdout, and stderr to /dev/null.\\
+	\hspace*{1cm}Write a complete C program which executes /u/ajr/crazy with these redirections in place. (All appropriate error checking is required.)
+		\lstinputlisting[language=c]{q9.c}
+		
+	\newpage
+	\item There is a computationally-intensive process which has been separated into two independent pieces, implemented by the functions f() and g(), each of which takes no parameters and returns an integer.\\
+	\hspace*{1cm} Write a complete C program which calls fork; one process computes f() and the other computes g(); and then your program outputs the sum of the two values. You will need a pipe so that the child process can convey the result to the parent.\\
+	\hspace{1cm} (There’s no exec(); all of this happens within one program.)
+		\lstinputlisting[language=c]{q10.c}
+
+	\newpage
+	\item The following program is a server which reads one byte (character) from each client, echoes it
+	back, and drops the connection.
+	\lstinputlisting[language=c]{serverqn.c}
+	\newpage
+	\begin{enumerate}
+		\item  Regarding the line ``r.sin\_port = htons(2000);" (line 23), what would happen if instead we simply wrote ``r.sin\_port = 2000;"?\\
+		The network protocols used need to have the port number stored in network order, which htons() does for us, if 2000 was used alone, the port number would be stored in host order which would cause networking problems.
+		\item On which line number will this program be blocked when no client is connected?\\
+		36
+		\item On which line number will this program be blocked when a client is connected but has not yet transmitted its byte?\\
+		40
+		\item In the switch statement beginning on line 40, under what circumstances will neither of the cases match? What will read()'s return value be, and why?\\
+		When connection is broken from client's side and no data is available, read will return 0 and neither of the cases will match.
+		\item Change the program in place so that it mostly functions as it currently does, except that if the byte transmitted from the client is a control-B (ASCII value 2), instead of sending the control-B back it sends the string ``ha!" plus a network newline.
+		\lstinputlisting[language=c]{serverqn fixed.c}
+	\end{enumerate}
+
+\end{enumerate}
+\end{document}

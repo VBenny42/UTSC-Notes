@@ -1,0 +1,455 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\usepackage{amstext}
+
+\usepackage{amsthm}
+\usepackage{color, fullpage, hyperref}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{commath}
+
+\usepackage[table]{xcolor}
+\usepackage{makecell}
+
+%\pagecolor[rgb]{0,0,0} %black    % to change page to night mode
+%\color[rgb]{0.5,0.5,0.5} %grey
+
+\usepackage{graphicx}
+\usepackage{tikz, pgfplots, hf-tikz}
+\pgfplotsset{compat=1.17}
+\allowdisplaybreaks
+\renewcommand\qedsymbol{$\blacksquare$}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\tcbuselibrary{fitting}
+\usepackage{empheq}
+
+\usepackage[margin=0.5in]{geometry}
+\usepackage{fancyvrb}
+
+\usepackage{enumerate}
+\usepackage{soul}
+%\usepackage{alltt}
+
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\definecolor{correct}{RGB}{37,150,190}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=5pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+\tcbset{
+	colback=blue!25!purple!10!,
+	colframe=blue!40}
+%\sethlcolor{correct}
+
+%\renewcommand{\theenumii}{\Alph{enumii}}
+
+\begin{document}
+\begin{enumerate}[{1}.1]
+	\item Select the option below that is \textbf{NOT} equivalent to the following statement: \Verb|int *p = 20;|
+		\begin{enumerate}
+			\item  \verb|int* p = 20;|
+			\item \verb|int * p = 20;|
+			\item \Verb|int *p; p = 20;|
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \Verb[formatcom=\color{correct}]|int *p; *p = 20;|
+			\item None of the above: All of the above statements are equivalent.
+		\end{enumerate}
+
+	\item Consider the program below, has a function call missing from main(). Select the correct function call that would result in the program printing the string “Hello, world!”.
+\begin{Verbatim}
+void increment1(int count) {
+	count++;
+}
+void increment2(int *count_ptr) {
+	(*count_ptr)++;
+}
+int main(int argc, char **argv) {
+	int count = 0;
+	_____________________; // Correct function call (from the options below) goes here
+	if(count == 1) printf("Hello, world!");
+	return 0;
+}
+\end{Verbatim}
+		\begin{enumerate}[A.]
+			\item \Verb|increment1(&count);|
+			\item \Verb|increment1(*count);|
+			\item \Verb|increment2(count);|
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \Verb[formatcom=\color{correct}]|increment2(&count);|
+			\item \Verb|increment2(*count);|
+		\end{enumerate}
+
+	\item Suppose we have the following declarations at the start of a program. Select the statement
+	below that does \textbf{NOT} assign the value 4 to the variable q.
+\begin{Verbatim}
+int x = 4;
+int *y = &x;
+int **z = &y;
+int q;
+\end{Verbatim}
+		\begin{enumerate}[A.]
+			\item \Verb|q = x;|
+			\item \Verb|q = *(&x);|
+			\item \Verb|q = *y;|
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \Verb[formatcom=\color{correct}]|q = &(*x);|
+			\item \Verb|q = **z;|
+		\end{enumerate}
+
+	\newpage
+	\item Consider the following code fragment, and assume (for the purposes of answering this question) that integers are 4 bytes and pointers are 8 bytes. Select the correct answer for how many bytes are allocated on the stack, and how many on the heap.\\
+	\Verb|int *A = malloc(sizeof(int) * 20);|
+		\begin{enumerate}[A.]
+			\item \Verb|Stack: 8 Heap: 160|
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \Verb[formatcom=\color{correct}]|Stack: 8 Heap: 80|
+			\item \Verb|Stack: 0 Heap: 168|
+			\item \Verb|Stack: 0 Heap: 88|
+			\item None of the above.
+		\end{enumerate}
+
+	\item Consider the program below, and select the correct output that matches what the program
+	will print.
+	\begin{Verbatim}
+struct StudentNode {
+	char *name;
+	int num; };
+void updateStudent(struct StudentNode s) {
+	s.num = s.num + 2;
+	strcat(s.name, " v2");
+}
+int main() {
+	struct StudentNode s1;
+	s1.num = 12345;
+	s1.name = malloc(256*sizeof(char));
+	strcpy(s1.name, "Bob");
+	updateStudent(s1);
+	printf("%s; ", s1.name);
+	printf("%d\n", s1.num);
+}
+	\end{Verbatim}
+			\begin{enumerate}[A.]
+				\item \Verb|Bob; 12345|
+				\item \Verb|Bob; 12347|
+				\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \Verb[formatcom=\color{correct}]|Bob v2; 12345|
+				\item \Verb|Bob v2; 12347|
+				\item This code will cause a segmentation fault, because \Verb*|strcpy| is unsafe.
+			\end{enumerate}
+
+	\item Select the statement below that is \textbf{TRUE} (or \textit{All of the above}, if they are all true), concerning signals.
+		\begin{enumerate}[A.]
+			\item A process can only send a signal to its parent process or its child processes.
+			\item The kill system call is used only to terminate processes.
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \textcolor{correct}{The default action of a SIGKILL signal cannot be modified.}
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \textcolor{correct}{A signal handler runs in a separate process from the program receiving the signal.}
+			\item All of the above are true.
+		\end{enumerate}
+
+	\newpage
+	\item Recall: (1) The \Verb*|tee| program, which reads from \Verb|stdin| and copies the stream to \textbf{both} \Verb*|stdout| and to the file specified by the command-line argument; (2) The \Verb*|sort| program, which sorts the lines of text contained in the file specified by the command-line argument, and outputs to \Verb|stdout|; and (3) The \Verb*|head| program, which reads from \Verb|stdin| and outputs the first 10 lines to \Verb|stdout|. Consider the following shell command, and select the statement below that is TRUE.
+	\begin{Verbatim}
+sort input.txt | tee output.txt | head
+	\end{Verbatim}
+		\begin{enumerate}[A.]
+			\item The contents of \Verb|input.txt| and \Verb|output.txt| are identical.
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \textcolor{correct}{Only the first 10 lines of \Verb|output.txt| will be displayed in the terminal.}
+			\item  The entire contents of \Verb|input.txt| followed by the first 10 lines of \Verb|output.txt| will be displayed in the terminal.
+			\item  The entire contents of \Verb|output.txt| followed by the first 10 lines of \Verb|output.txt| will be displayed in the terminal.
+			\item  The entire contents of both \Verb|input.txt| and \Verb|output.txt|, followed by the first 10 lines of \Verb|output.txt|, will be displayed in the terminal.
+		\end{enumerate}
+
+	\item Select the statement below that is \textbf{TRUE}, concerning the invocation of the \Verb|read()| or \Verb|write()| system calls on a pipe.
+		\begin{enumerate}[A.]
+			\item A \Verb|read()| invocation on a pipe that has completely filled its buffer will return the number of bytes that were read, but only if at least one process still has an open write descriptor to the pipe.
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \textcolor{correct}{A \Verb|read()| invocation on an empty pipe will block indefinitely until data is available, or until all processes close their write descriptors to the pipe.}
+			\item A \Verb|read()| invocation on an empty pipe will immediately generate a \Verb|SIGPIPE| signal, if all processes have closed their write descriptors to the pipe.
+			\item A \Verb|write()| invocation on a full pipe will immediately generate a \Verb|SIGPIPE| signal, if another process has an open read descriptor to the pipe but never invokes \Verb|read()|.
+			\item A \Verb|write()| invocation on a pipe will block indefinitely if no process has an open read descriptor to the pipe.
+		\end{enumerate}
+
+	\item Select the statement below that is \textbf{TRUE}, concerning the \Verb|fork()| system call.
+		\begin{enumerate}[A.]
+			\item After \Verb|fork()| returns, the child process will always execute first .
+			\item After \Verb|fork()| returns, the parent process will always execute first .
+			\item If a child process updates the value of a \textbf{static} variable, it will be updated in the parent process as well.
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \textcolor{correct}{The child process will inherit the open file descriptor table of its parent.}
+			\item The parent process will not terminate until all of its children have terminated.
+		\end{enumerate}
+
+	\item Select the statement below that is \textbf{TRUE} (or \textit{All of the above}, if they are all true), concerning the \Verb|exec()| family of system calls.
+		\begin{enumerate}[A.]
+			\item The \Verb|exec| system calls do not create a new process.
+			\item After \Verb|exec| is called, the new program inherits the open file descriptor table of the original
+			program.
+			\item If a call to \Verb|exec| succeeds, it will not return a value.
+			\item After \Verb|exec|, the new program will retain the PID of the previously-running program.
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \textcolor{correct}{All of the above are true.}
+		\end{enumerate}
+
+	\newpage
+	\item Select the statement that is \textbf{TRUE}, considering the program consisting of the following two
+	source files. Assume that the program is compiled with \Verb|gcc -o hello hello.c main.c|.
+		\begin{Verbatim}
+/* Complete contents of main.c */
+void hello(void);
+int main(void) {
+	hello();
+	return 0; }
+/* Complete contents of hello.c */
+#include <stdio.h>
+void hello() {
+	printf("Hello, world!\n");
+}
+		\end{Verbatim}
+		\begin{enumerate}[A.]
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \textcolor{correct}{The program will fail to compile, because \Verb|main.c| is missing the line} \Verb[formatcom=\color{correct}]|#include "hello.c".|
+			\item The program will fail to compile, because \Verb|main.c| is missing the line \Verb|#include <stdio.h>|.
+			\item The program will fail to compile, because the \Verb|gcc| command is incorrect.
+			\item The program will compile successfully, but its behaviour is undefined (e.g., it may trigger a segmentation fault or print out garbage values).
+			\item The program will compile and print \Verb|Hello, world!| to the terminal.
+		\end{enumerate}
+
+	\item Select the statement below that is \textbf{TRUE} (or \textit{All of the above}, if they are all true), concerning threads and processes.
+		\begin{enumerate}[A.]
+			\item Processes do not share the same memory space, but threads belonging to the same process do.
+			\item Process creation with \Verb|fork| is slow, but thread creation is much faster.
+			\item Each thread has its own global \Verb|errno| variable.
+			\item Threads belonging to the same process share the same heap and global variables, but have separate function call stacks.
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \textcolor{correct}{All of the above are true.}
+		\end{enumerate}
+
+	\newpage
+	\item Select the statement that is \textbf{TRUE}, considering the program below.
+		\begin{Verbatim}
+struct my_struct {
+	char *name;
+};
+void array_chief(struct my_struct *s) {
+	char new[4] = {’a’, ’b’, ’c’, ’\0’};
+	s->name = new;
+}
+int main(void) {
+	struct my_struct s1;
+	s1.name = "Bob";
+	array_chief(&s1);
+	printf("%s\n", s1.name);
+	/* Do other things, call some other functions... */
+	return 0;
+}
+		\end{Verbatim}
+		\begin{enumerate}[A.]
+			\item The program will fail to compile, because \Verb|array_chief()| assigns an array to a pointer variable.
+			\item The program will fail to compile, because \Verb|s1.name| in \Verb|main()| is a read-only string literal, which \Verb|array_chief()| attempts to overwrite.
+			\item The program will compile without errors, but a segmentation fault will be triggered when \Verb|main()| assigns the return value of \Verb|array_chief()| to \Verb|s1.name|, since the latter is a read- only string literal.
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \textcolor{correct}{The program will compile without errors, but its behaviour is undefined, e.g., it may print \Verb|abc| or it may print other garbage values or result in other unpredictable behaviour.}
+			\item The program will compile without errors, and will always print out \Verb|abc|.
+		\end{enumerate}
+
+	\item Select the file type that is most appropriate for opening with \Verb|fopen| using the \Verb|"rb"| flag.
+		\begin{enumerate}[A.]
+			\item A C program’s header file(s).
+			\item[\textcolor{correct}{\addtocounter{enumii}{1}\Alph{enumii}.}] \textcolor{correct}{A C program’s object file(s).}
+			\item A C program’s source file(s).
+			\item A Makefile.
+			\item None of the above are appropriate to open using the \Verb|"rb"| flag.
+		\end{enumerate}
+\end{enumerate}
+
+\newpage
+\begin{enumerate}
+	\setcounter{enumi}{1}
+	\item \textbf{Structs and Dynamically Allocated Arrays}\\
+		The program below defines a struct to manage a \textit{dynamically-allocated array}. Your job is to write two helper functions, \Verb|initialize| and \Verb|add|, to make the program work correctly. The requirements are as follows:
+			\begin{itemize}
+				\item \Verb|initialize| initializes an \Verb|array_list| struct, which is passed in as the single input parameter. By default, the array should have a capacity of 5.
+				\item \Verb|add| appends one or more integers contained in the array passed in the first parameter (which may be either on the stack or the heap). The second parameter specifies the number of integers contained in the array being passed in the first parameter. The third parameter specifies the \Verb|array_list| to which the new integer(s) should be added. If there is not enough space in the \Verb|array_list|, a new array should be allocated that is big enough to hold \textbf{double} the new elements plus the existing elements (i.e. double the total of the two), and the contents of the old array should be moved into the new one (for full marks, do this without writing a loop) before appending the new integers to the list.
+			\end{itemize}
+		We have not provided you with the function signatures for \Verb|initialize| and \Verb|add|: You need to determine these yourself, in a way that satisfies both the requirements given above and the correctness of the program below.\\
+		Both \Verb|initialize| and \Verb|add| should perform any necessary error checking: They should return \Verb|0| on success, and \Verb|-1| on failure.
+		\begin{Verbatim}
+struct array_list {
+	int *contents;
+	size_t capacity;      // Current capacity of the array
+	size_t curr_elements; // Number of elements currently occupied in the array
+};
+int main(void) {
+	struct array_list list;
+	initialize(&list);
+	int a[11] = {2, 0, 9, 4, 5, 6, 7, 8, 9, 10, 11};
+	add(a, 11, &list);
+	// The loop below should print "2 0 9 4 5 6 7 8 9 10 11 "
+	for(int i = 0; i < list.curr_elements; i++)
+	printf("%d ", list.contents[i]);
+	/* The program does some fancy stuff with the array here,
+	* generates some output, and performs any remaining
+	* cleanup before terminating.
+	*/
+	return 0; }
+		\end{Verbatim}
+	\newpage
+		\lstinputlisting[language=c]{q2.c}
+
+	\newpage
+	\item \textbf{Signals}\\
+		Study the following program that installs a signal handler.
+		\begin{Verbatim}
+int turn = 0;
+void handler(int code) {
+	if(turn == 0) {
+		fprintf(stderr, "First\n");
+		turn = 1;
+		/* D */
+	}
+	else {
+		fprintf(stderr, "Second\n");
+		kill(getpid(), SIGQUIT);
+	}
+	fprintf(stderr, "Here\n");
+}
+int main(void) {
+	struct sigaction sa;
+	sa.sa_handler = handler;
+	sa.sa_flags = 0;
+	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SIGINT);
+	/* A */
+	sigaction(SIGTERM, &sa, NULL);
+	/* B */
+	fprintf(stderr, "Done\n");
+	/* C */
+	return 0; }
+		\end{Verbatim}
+		On the next page, provide the output of the above program when the events described in each subquestion occurs, assuming that the code runs correctly, i.e., no undefined behaviour or other unspecified events occur. Treat each subquestion as if the program were restarted. Each event is described as a signal that is delivered to the program just before the program executes the line of code following the specified comment line (i.e., A, B, C, or D). Give the \textbf{TOTAL} output of the program in each case.\\
+		\textbf{Note:} When a process exits due to a \Verb|SIGTERM|, \Verb|SIGQUIT|, or \Verb|SIGKILL|, the shell process prints “Terminated”, “Quit”, or “Killed”, respectively, after the program terminates. Include these messages in your answers where applicable.
+
+		\newpage
+		\begin{enumerate}[{3}.1]
+			\item Two \Verb|SIGTERM| signals arrive one after the other at A.
+				\begin{tcolorbox}
+					Because \Verb[formatcom=\color{correct}]|sigaction| has not been used as yet, \Verb[formatcom=\color{correct}]|SIGTERM| will not be handled by the installed handler, so shell would print ``Terminated" for the first \Verb[formatcom=\color{correct}]|SIGTERM|, and since the program is terminated after the first signal, sending the second \Verb[formatcom=\color{correct}]|SIGTERM| would do nothing.
+				\end{tcolorbox}
+			\item \Verb|SIGTERM| arrives at B and \Verb|SIGTERM| arrives again at C.
+				\begin{tcolorbox}
+					\Verb[formatcom=\color{correct}]|First|, then \Verb[formatcom=\color{correct}]|Here|, then \Verb[formatcom=\color{correct}]|Done| gets printed to \Verb[formatcom=\color{correct}]|stderr| when \Verb[formatcom=\color{correct}]|SIGTERM| arrives at B.\\
+				\Verb[formatcom=\color{correct}]|Second| gets printed to \Verb[formatcom=\color{correct}]|stderr| and then shell would print ``Quit".
+				\end{tcolorbox}
+			\item \Verb|SIGTERM| arrives at B and \Verb|SIGINT| arrives at D.
+				\begin{tcolorbox}
+					\Verb[formatcom=\color{correct}]|First| would be printed due to \Verb[formatcom=\color{correct}]|SIGTERM| arriving, and since \Verb[formatcom=\color{correct}]|SIGINT| is in masked in \Verb[formatcom=\color{correct}]|sa|, \Verb[formatcom=\color{correct}]|SIGINT| at D would cause no interruption, therefore \Verb[formatcom=\color{correct}]|Here| then \Verb[formatcom=\color{correct}]|Done| would be printed to \Verb[formatcom=\color{correct}]|stderr|.
+				\end{tcolorbox}
+			\item SIGTERM arrives at B and SIGKILL at D
+					\begin{tcolorbox}
+						\Verb[formatcom=\color{correct}]|First| would be printed due to \Verb[formatcom=\color{correct}]|SIGTERM| arriving, and since \Verb[formatcom=\color{correct}]|SIGKILL| cannot be handled, shell would print ``Killed".
+					\end{tcolorbox}
+			\item True or False: \Verb|fprintf| is async-signal-safe, assuming it is used in a single-threaded program.
+				\begin{tcolorbox}
+					False
+				\end{tcolorbox}
+		\end{enumerate}
+
+	\newpage
+	\item \textbf{Forking}
+		\begin{enumerate}[{4.1}]
+			\item Consider the program below, and enter the correct numbers in the table on the right-hand side.\\
+				\begin{minipage}[t]{0.5\textwidth}
+					\begin{Verbatim}
+int main(void)
+{
+	int i = 0;
+	printf("Broccoli\n");
+	int r = fork();
+	printf("Cucumbers\n");
+	if (r == 0) {
+		printf("Kale\n");
+		int k = fork();
+		if (k >= 0) {
+			printf("Peppers\n");
+		}
+	} else if (r > 0) {
+		wait(NULL);
+		printf("Cabbage\n");
+		while(fork() == 0) {
+			printf("Carrots\n");
+			i++;
+			if(i == 3) break;
+		}
+		i = 0;
+		while(fork() > 0) {
+			printf("Spinach\n");
+			i++;
+			if(i == 2) break;
+		}
+	}
+	return 0;
+}
+
+					\end{Verbatim}
+				\end{minipage}
+				\begin{minipage}[t]{0.5\textwidth}
+					\vspace{1in}
+					\hspace*{0.5cm}\begin{tabular}[t]{| l | c |}
+						\hline
+						\textbf{Fruit name} & \textbf{Times printed}\\
+						\hline
+						\Verb|Broccoli| & 1\\
+						\hline
+						\Verb|Cucumbers| & 2\\
+						\hline
+						\Verb|Kale| & 1\\
+						\hline
+						\Verb|Peppers| & 2\\
+						\hline
+						\Verb|Cabbage| & 1\\
+						\hline
+						\Verb|Carrots| & 3\\
+						\hline
+						\Verb|Spinach| & 8\\
+						\hline
+					\end{tabular}
+				\end{minipage}
+
+			\newpage
+			Assuming that the above program runs without errors (e.g., \Verb|fork| always returns successfully, and the program is not terminated by a signal such as \Verb|SIGKILL|):
+				\item How many distinct processes print ``Spinach"?
+					\begin{tcolorbox}6?\end{tcolorbox}
+				\item How many distinct processes print “Carrots”?
+					\begin{tcolorbox}3\end{tcolorbox}
+				\item True or False: The second line of output should ALWAYS be “Cucumbers”.
+					\begin{tcolorbox}True, Broccoli should only print one time.\end{tcolorbox}
+				\item True or False: The last line of output should ALWAYS be “Spinach”.
+					\begin{tcolorbox}False, race conditions (I think)\end{tcolorbox}
+				\item True or False: “Peppers” is ALWAYS printed before “Cabbage”.
+					\begin{tcolorbox}True (?), the \Verb|fork| process with \Verb|r| waits for child process\end{tcolorbox}
+				\item List all the vegetable(s) that will NEVER be printed after the bash prompt re-appears.
+					\begin{tcolorbox}Broccoli, Cucumbers, Kale\end{tcolorbox}
+				\item List all the vegetable(s) that MIGHT be printed after the bash prompt re-appears.
+					\begin{tcolorbox}Peppers, Cabbage, Carrots, Spinach\end{tcolorbox}
+		\end{enumerate}
+
+	\newpage
+	\item \textbf{Pipes}\\
+		Write a program that forks two children. We refer to the first child (i.e. the child that is created first) as Child A, and the second as Child B.\\
+		Child A must be able to send a stream of bytes to Child B over a pipe. All processes must close file descriptors at the earliest appropriate point in the program, and perform any necessary error checking. Right after this is done, Child A must invoke \Verb|foo_a()| and Child B must invoke \Verb|foo_b()| (you may assume that neither of these functions will return back to main). You do not need to worry about writing any data to the pipe --- simply ensure that the pipe is correctly set up to allow Child A to send data over it to Child B.
+			\lstinputlisting[language=c]{q5.c}
+\end{enumerate}
+\end{document}
